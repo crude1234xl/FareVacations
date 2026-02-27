@@ -154,8 +154,14 @@ ul {
     color: var(--secondary-color);
 }
 
-.dropdown:hover .dropdown-content {
-    display: block;
+@media (min-width: 769px) {
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+}
+
+.dropdown-content.show {
+    display: block !important;
 }
 
 .hamburger {
@@ -671,6 +677,17 @@ footer {
 
     .nav-links.active {
         display: flex;
+    }
+
+    .dropdown {
+        width: 100%;
+        text-align: center;
+    }
+
+    .dropdown-content {
+        position: static;
+        box-shadow: none;
+        background-color: var(--light-bg);
     }
 
     .hamburger {
