@@ -16,17 +16,37 @@ hamburger.addEventListener('click', () => {
     }
 });
 
-// Close mobile menu when a link is clicked
+// Close mobile menu when a regular link is clicked
 navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
+    link.addEventListener('click', (e) => {
+        // Skip the dropdown button as it has its own inline onclick handler now
+        if (link.classList.contains('dropbtn')) {
+            return;
+        }
+
         if (window.innerWidth <= 768) {
             navLinks.classList.remove('active');
+            // Also close dropdown if open
+            const dropdownContent = document.querySelector('.dropdown-content');
+            if (dropdownContent) dropdownContent.classList.remove('show');
+
             const icon = hamburger.querySelector('i');
             icon.classList.remove('fa-times');
             icon.classList.add('fa-bars');
         }
     });
 });
+
+// Explicit function for mobile dropdown toggling directly from HTML onclick
+function toggleMobileDropdown(event) {
+    if (window.innerWidth <= 768) {
+        event.preventDefault();
+        const dropdownContent = document.getElementById('airlinesDropdown');
+        if (dropdownContent) {
+            dropdownContent.classList.toggle('show');
+        }
+    }
+}
 
 // Smooth scrolling for anchor links starting with # on the same page
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
